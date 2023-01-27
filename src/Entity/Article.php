@@ -32,10 +32,17 @@ class Article
      */
     private $content;
 
+
+
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="Articles")
      */
-    private $createdAt;
+    private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Articles")
+     */
+    private $author;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -43,14 +50,11 @@ class Article
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=category::class, inversedBy="Articles")
+     * @ORM\Column(type="datetime_immutable")
      */
-    private $category;
+    private $createdAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="Articles")
-     */
-    private $author;
+
 
     public function getId(): ?int
     {
@@ -93,6 +97,44 @@ class Article
         return $this;
     }
 
+
+
+    public function getCategory(): ?category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(category $category): ?self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?user
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(user $author): ?self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -105,40 +147,6 @@ class Article
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeImmutable $updatededAt): self
-    {
-        $this->createdAt = $updatededAt;
-
-        return $this;
-    }
 
 
-    public function getCategory(): ?category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?user
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?user $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 }

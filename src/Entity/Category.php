@@ -25,7 +25,7 @@ class Category
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="Category")
      */
     private $articles;
 
@@ -80,4 +80,10 @@ class Category
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
 }
